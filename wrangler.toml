@@ -1,0 +1,26 @@
+# Frontend/wrangler.toml
+name = "quillquest"
+compatibility_date = "2024-01-01"
+
+[build]
+command = "npm run build"
+output_directory = "build"
+node_compat = true
+
+[env.production]
+REACT_APP_API_URL = "https://api.quillquest.pages.dev/api"
+NODE_ENV = "production"
+
+[env.development]
+REACT_APP_API_URL = "http://localhost:5000/api"
+NODE_ENV = "development"
+
+# Add custom headers
+[[headers]]
+for = "/*"
+[headers.values]
+Content-Security-Policy = "default-src 'self'; connect-src 'self' https://api.quillquest.pages.dev; img-src 'self' data: https:; style-src 'self' 'unsafe-inline';"
+X-Frame-Options = "DENY"
+X-Content-Type-Options = "nosniff"
+Referrer-Policy = "strict-origin-when-cross-origin"
+Permissions-Policy = "camera=(), microphone=(), geolocation=()"

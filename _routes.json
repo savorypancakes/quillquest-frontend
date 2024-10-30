@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "include": ["/*"],
+  "exclude": ["/api/*"],
+  "routes": [
+    {
+      "src": "/api/.*",
+      "dest": "https://api.quillquest.pages.dev/api/$1"
+    },
+    {
+      "src": "/(.*)\\.(?:js|css|png|jpg|gif|svg|ico)$",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
