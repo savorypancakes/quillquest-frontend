@@ -4,10 +4,10 @@ import axios from 'axios';
 // Configure base URL based on environment
 const getBaseUrl = () => {
   if (process.env.NODE_ENV === 'production') {
-    // In production, use relative path since frontend and backend are served from same domain
-    return '/api';
+    // In production, use the full API URL from environment variable
+    return process.env.REACT_APP_API_URL || 'https://quillquest-api.onrender.com/api';
   }
-  // In development, use the full URL
+  // In development, use the local URL
   return process.env.REACT_APP_API_BASE_URL 
     ? `${process.env.REACT_APP_API_BASE_URL}/api` 
     : 'http://localhost:5000/api';
@@ -19,6 +19,8 @@ const api = axios.create({
     'Content-Type': 'application/json',
   },
   timeout: 15000,
+  // Enable credentials for cross-origin requests
+  withCredentials: true
 });
 
 // Request interceptor with improved logging
@@ -146,5 +148,31 @@ if (process.env.NODE_ENV === 'production') {
     return response;
   });
 }
+
+// Add connection status monitoring
+const connectionStatus = {
+  isOnline: true,
+  listeners: new Set(),
+};
+
+// Monitor connection status
+window.addEventListener('online', () => {
+  connectionStatus.isOnline = true;
+  connectionStatus.listeners.forEach(listener => listener(true));
+});
+
+window.addEventListener('offline', () => {
+  connectionStatus.isOnline = false;
+  connectionStatus.listeners.forEach(listener => listener(false));
+});
+
+// Export connection monitoring utilities
+export const connection = {
+  isOnline: () => connectionStatus.isOnline,
+  onStatusChange: (listener) => {
+    connectionStatus.listeners.add(listener);
+    return () => connectionStatus.listeners.delete(listener);
+  }
+};
 
 export default api;
