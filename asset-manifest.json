@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/savorypancakes/quillquest-frontend/static/css/main.d578dc40.css",
+    "main.js": "/savorypancakes/quillquest-frontend/static/js/main.8f4a42fb.js",
+    "static/js/206.f8819006.chunk.js": "/savorypancakes/quillquest-frontend/static/js/206.f8819006.chunk.js",
+    "static/media/logo-2.png": "/savorypancakes/quillquest-frontend/static/media/logo-2.40911710888561ee76d2.png",
+    "static/media/logo-3.png": "/savorypancakes/quillquest-frontend/static/media/logo-3.2043fc651329c6d712ab.png",
+    "index.html": "/savorypancakes/quillquest-frontend/index.html"
+  },
+  "entrypoints": [
+    "static/css/main.d578dc40.css",
+    "static/js/main.8f4a42fb.js"
+  ]
+}
